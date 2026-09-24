@@ -1,6 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="22" fill="#1a1423"/>
-  <rect x="16" y="30" width="34" height="40" rx="8" fill="#ff5d73"/>
-  <rect x="42" y="24" width="34" height="52" rx="8" fill="#ffd23f"/>
-  <rect x="60" y="18" width="26" height="64" rx="8" fill="#3ddc97"/>
+  <defs>
+    <radialGradient id="g" cx="50%" cy="42%" r="60%">
+      <stop offset="0%" stop-color="#2a0509"/>
+      <stop offset="100%" stop-color="#0a0203"/>
+    </radialGradient>
+    <radialGradient id="orb" cx="38%" cy="34%" r="75%">
+      <stop offset="0%" stop-color="#ff5d5f"/>
+      <stop offset="55%" stop-color="#e11d3a"/>
+      <stop offset="100%" stop-color="#7a0a1c"/>
+    </radialGradient>
+  </defs>
+  <rect width="100" height="100" rx="22" fill="url(#g)"/>
+  <circle cx="50" cy="44" r="26" fill="url(#orb)"/>
+  <circle cx="50" cy="44" r="27.5" fill="none" stroke="#ff3b4e" stroke-width="1.5" opacity="0.9"/>
+  <g stroke="#ff2d3f" stroke-width="2.4" opacity="0.85">
+    <line x1="10" y1="82" x2="90" y2="82"/>
+    <line x1="22" y1="90" x2="78" y2="90"/>
+    <line x1="34" y1="76" x2="34" y2="94"/>
+    <line x1="66" y1="76" x2="66" y2="94"/>
+  </g>
 </svg>

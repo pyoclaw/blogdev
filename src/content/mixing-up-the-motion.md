@@ -1,6 +1,6 @@
 ---
 title: "Mixing Up the Motion: Per-Route Transitions & Pointer Play"
-date: "2026-09-24"
+date: "2026-09-23"
 tags: [motion, framer-motion, javascript, ux]
 accent: grape
 excerpt: "One slide for every page got monotonous. Now each destination has its own entrance — rise, zoom, swing, arc — plus tilting cards, magnetic buttons, and a nav pill that glides. Here's the whole choreography."

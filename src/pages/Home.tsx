@@ -4,6 +4,7 @@ import { SlideLink } from "../lib/navigation";
 import { posts, getAllTags, tagAccent } from "../lib/posts";
 import PostCard, { FeatureCard } from "../components/PostCard";
 import MagneticButton from "../components/MagneticButton";
+import { Orb, NeonGrid } from "../components/CosmicScene";
 
 /* Word-by-word reveal for the headline. */
 const titleWords = [
@@ -32,12 +33,6 @@ const word: Variants = {
   },
 };
 
-const blobs = [
-  { c: "coral", size: 220, top: "8%", left: "72%", d: 0 },
-  { c: "mint", size: 150, top: "48%", left: "84%", d: 1.2 },
-  { c: "lemon", size: 120, top: "62%", left: "6%", d: 0.6 },
-];
-
 export default function Home() {
   useEffect(() => {
     document.title = "slidedeck — a self-documenting dev blog";
@@ -49,28 +44,22 @@ export default function Home() {
   return (
     <div className="page-home">
       <section className="hero wrap">
-        <div className="hero__deco" aria-hidden="true">
-          {blobs.map((b, i) => (
-            <motion.span
-              key={i}
-              className="blob"
-              style={{
-                width: b.size,
-                height: b.size,
-                top: b.top,
-                left: b.left,
-                background: `var(--${b.c})`,
-              }}
-              animate={{ y: [0, -22, 0], x: [0, 12, 0] }}
-              transition={{
-                duration: 7 + i,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: b.d,
-              }}
-            />
-          ))}
-        </div>
+        <Orb />
+        <NeonGrid />
+        <span className="hero__ghost" aria-hidden="true">
+          赤
+        </span>
+
+        <motion.div
+          className="hero__kana"
+          aria-hidden="true"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 0.85, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          スライドデッキ
+          <span className="rising" />
+        </motion.div>
 
         <motion.span
           className="hero__eyebrow"
