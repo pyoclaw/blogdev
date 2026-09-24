@@ -1,4 +1,5 @@
 import { useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 import { SlideLink } from "../lib/navigation";
 
 function isActive(pathname: string, to: string) {
@@ -33,17 +34,27 @@ export default function NavBar() {
         <span className="nav__spacer" />
 
         <nav className="nav__links" aria-label="Primary">
-          {links.map((l) => (
-            <SlideLink
-              key={l.to}
-              to={l.to}
-              className={
-                "nav-link" + (isActive(pathname, l.to) ? " is-active" : "")
-              }
-            >
-              {l.label}
-            </SlideLink>
-          ))}
+          {links.map((l) => {
+            const active = isActive(pathname, l.to);
+            return (
+              <SlideLink
+                key={l.to}
+                to={l.to}
+                className={"nav-link" + (active ? " is-active" : "")}
+              >
+                {/* Shared-layout pill: a single element that glides from the
+                    old active link to the new one via matching layoutId. */}
+                {active && (
+                  <motion.span
+                    layoutId="nav-pill"
+                    className="nav-pill"
+                    transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                  />
+                )}
+                <span className="nav-link__label">{l.label}</span>
+              </SlideLink>
+            );
+          })}
         </nav>
       </div>
     </header>

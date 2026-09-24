@@ -11,6 +11,7 @@ import {
   formatDate,
   tagAccent,
 } from "../lib/posts";
+import CodeBlock from "../components/CodeBlock";
 import NotFound from "./NotFound";
 
 function useReadingProgress() {
@@ -100,6 +101,7 @@ export default function PostPage() {
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[[rehypeHighlight, { detect: true, ignoreMissing: true }]]}
+            components={{ pre: CodeBlock }}
           >
             {post.body}
           </ReactMarkdown>

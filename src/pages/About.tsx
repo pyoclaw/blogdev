@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { SlideLink } from "../lib/navigation";
+import MagneticButton from "../components/MagneticButton";
 
 export default function About() {
   useEffect(() => {
@@ -55,12 +56,12 @@ export default function About() {
         </div>
 
         <div className="hero__cta" style={{ marginTop: "2rem" }}>
-          <SlideLink to="/posts" className="btn btn--coral">
+          <MagneticButton to="/posts" className="btn--coral">
             Read the posts ↦
-          </SlideLink>
-          <SlideLink to="/tags" className="btn btn--ghost">
+          </MagneticButton>
+          <MagneticButton to="/tags" className="btn--ghost">
             Browse tags
-          </SlideLink>
+          </MagneticButton>
         </div>
       </div>
     </div>

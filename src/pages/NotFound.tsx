@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { SlideLink } from "../lib/navigation";
+import MagneticButton from "../components/MagneticButton";
 
 export default function NotFound() {
   useEffect(() => {
@@ -15,9 +15,9 @@ export default function NotFound() {
           The page slid clean off the edge of the deck. Let's get you back onto
           the track.
         </p>
-        <SlideLink to="/" className="btn btn--coral" direction="back">
+        <MagneticButton to="/" className="btn--coral" direction="back">
           ← Back to home
-        </SlideLink>
+        </MagneticButton>
       </div>
     </div>
   );

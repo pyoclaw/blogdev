@@ -1,8 +1,36 @@
 import { useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { SlideLink } from "../lib/navigation";
 import { posts, getAllTags, tagAccent } from "../lib/posts";
 import PostCard, { FeatureCard } from "../components/PostCard";
+import MagneticButton from "../components/MagneticButton";
+
+/* Word-by-word reveal for the headline. */
+const titleWords = [
+  { t: "A" },
+  { t: "blog" },
+  { t: "that" },
+  { t: "slides", swipe: true },
+  { t: "—" },
+  { t: "and" },
+  { t: "tells" },
+  { t: "you" },
+  { t: "how." },
+];
+
+const container: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.07, delayChildren: 0.05 } },
+};
+const word: Variants = {
+  hidden: { opacity: 0, y: "0.6em", rotate: -4 },
+  show: {
+    opacity: 1,
+    y: "0em",
+    rotate: 0,
+    transition: { type: "spring", stiffness: 420, damping: 26 },
+  },
+};
 
 const blobs = [
   { c: "coral", size: 220, top: "8%", left: "72%", d: 0 },
@@ -55,11 +83,21 @@ export default function Home() {
 
         <motion.h1
           className="hero__title"
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.05 }}
+          variants={container}
+          initial="hidden"
+          animate="show"
         >
-          A blog that <span className="swipe">slides</span> — and tells you how.
+          {titleWords.map((w, i) => (
+            <span className="word" key={i}>
+              <motion.span
+                className={"word__inner" + (w.swipe ? " swipe" : "")}
+                variants={word}
+              >
+                {w.t}
+              </motion.span>
+              {i < titleWords.length - 1 ? " " : ""}
+            </span>
+          ))}
         </motion.h1>
 
         <motion.p
@@ -79,12 +117,12 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.18 }}
         >
-          <SlideLink to="/posts" className="btn btn--coral">
+          <MagneticButton to="/posts" className="btn--coral">
             Read the teardown ↦
-          </SlideLink>
-          <SlideLink to="/tags" className="btn btn--ghost">
+          </MagneticButton>
+          <MagneticButton to="/tags" className="btn--ghost">
             Browse by tag
-          </SlideLink>
+          </MagneticButton>
         </motion.div>
       </section>
 
