@@ -1,8 +1,8 @@
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { SlideLink } from "../lib/navigation";
 import { getPostsByTag, getAllTags, tagAccent } from "../lib/posts";
 import PostCard from "../components/PostCard";
+import Seo from "../components/Seo";
 
 export default function TagPage() {
   const { tag = "" } = useParams();
@@ -10,12 +10,14 @@ export default function TagPage() {
   const matches = getPostsByTag(decoded);
   const allTags = getAllTags();
 
-  useEffect(() => {
-    document.title = `#${decoded} — slidedeck`;
-  }, [decoded]);
-
   return (
     <div className="wrap section-pad">
+      <Seo
+        title={`#${decoded} — slidedeck`}
+        description={`Read ${matches.length} slidedeck ${matches.length === 1 ? "post" : "posts"} tagged with ${decoded}.`}
+        robots={matches.length > 0 ? "index,follow" : "noindex,follow"}
+      />
+
       <div className="section-head">
         <div>
           <h2>
@@ -23,8 +25,7 @@ export default function TagPage() {
             {decoded}
           </h2>
           <p>
-            {matches.length} {matches.length === 1 ? "post" : "posts"} tagged
-            with this technique.
+            {matches.length} {matches.length === 1 ? "post" : "posts"} tagged with this technique.
           </p>
         </div>
         <SlideLink to="/tags" className="btn btn--ghost" direction="back">

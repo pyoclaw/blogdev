@@ -24,9 +24,7 @@ export default function MagneticButton({
       onMouseLeave={onMouseLeave}
     >
       <SlideLink to={to} className={`btn ${className}`} direction={direction}>
-        <motion.span
-          style={{ x, y, display: "inline-flex", alignItems: "center", gap: "0.5rem" }}
-        >
+        <motion.span style={{ x, y, display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
           {children}
         </motion.span>
       </SlideLink>

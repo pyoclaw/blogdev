@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 /* -------------------------------------------------------------------------
    CosmicScene.tsx — the red-cosmic hero backdrop
@@ -13,12 +13,14 @@ import { motion } from "framer-motion";
    ------------------------------------------------------------------------- */
 
 export function Orb() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <motion.div
       className="hero__deco"
-      initial={{ opacity: 0, scale: 0.9 }}
+      initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1.1, ease: "easeOut" }}
+      transition={{ duration: prefersReducedMotion ? 0 : 1.1, ease: "easeOut" }}
       aria-hidden="true"
     >
       <motion.div
@@ -29,8 +31,10 @@ export function Orb() {
           top: "-8%",
           right: "-4%",
         }}
-        animate={{ y: [0, -18, 0] }}
-        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+        animate={prefersReducedMotion ? undefined : { y: [0, -18, 0] }}
+        transition={
+          prefersReducedMotion ? undefined : { duration: 9, repeat: Infinity, ease: "easeInOut" }
+        }
       >
         <span
           className="orb__ring"

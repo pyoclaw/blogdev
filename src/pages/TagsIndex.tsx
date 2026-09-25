@@ -1,16 +1,17 @@
-import { useEffect } from "react";
 import { SlideLink } from "../lib/navigation";
 import { getAllTags, tagAccent } from "../lib/posts";
+import Seo from "../components/Seo";
 
 export default function TagsIndex() {
-  useEffect(() => {
-    document.title = "Tags — slidedeck";
-  }, []);
-
   const tags = getAllTags();
 
   return (
     <div className="wrap section-pad">
+      <Seo
+        title="Tags — slidedeck"
+        description="Browse slidedeck posts by technique: CSS, motion, accessibility, markdown, Vite, React Router, and more."
+      />
+
       <div className="section-head">
         <div>
           <h2>Every tag</h2>

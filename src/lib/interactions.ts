@@ -1,9 +1,4 @@
-import {
-  useMotionValue,
-  useSpring,
-  type MotionValue,
-  type MotionStyle,
-} from "framer-motion";
+import { useMotionValue, useSpring, type MotionValue, type MotionStyle } from "framer-motion";
 
 /* -------------------------------------------------------------------------
    interactions.ts — small, reusable pointer micro-interactions

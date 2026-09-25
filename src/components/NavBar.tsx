@@ -41,6 +41,7 @@ export default function NavBar() {
                 key={l.to}
                 to={l.to}
                 className={"nav-link" + (active ? " is-active" : "")}
+                aria-current={active ? "page" : undefined}
               >
                 {/* Shared-layout pill: a single element that glides from the
                     old active link to the new one via matching layoutId. */}

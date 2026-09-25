@@ -4,15 +4,24 @@ import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
+import css from "highlight.js/lib/languages/css";
+import javascript from "highlight.js/lib/languages/javascript";
+import typescript from "highlight.js/lib/languages/typescript";
 import { SlideLink } from "../lib/navigation";
-import {
-  getPost,
-  getAdjacent,
-  formatDate,
-  tagAccent,
-} from "../lib/posts";
+import { getPost, getAdjacent, formatDate, tagAccent } from "../lib/posts";
 import CodeBlock from "../components/CodeBlock";
+import Seo from "../components/Seo";
 import NotFound from "./NotFound";
+
+const HIGHLIGHT_LANGUAGES = {
+  css,
+  js: javascript,
+  javascript,
+  jsx: javascript,
+  ts: typescript,
+  tsx: typescript,
+  typescript,
+};
 
 function useReadingProgress() {
   const [p, setP] = useState(0);
@@ -38,16 +47,19 @@ export default function PostPage() {
   const post = slug ? getPost(slug) : undefined;
   const progress = useReadingProgress();
 
-  useEffect(() => {
-    if (post) document.title = `${post.title} — slidedeck`;
-  }, [post]);
-
   if (!post) return <NotFound />;
 
   const { prev, next } = getAdjacent(post.slug);
 
   return (
     <>
+      <Seo
+        title={`${post.title} — slidedeck`}
+        description={post.excerpt}
+        type="article"
+        publishedTime={post.date}
+        tags={post.tags}
+      />
       <div className="progress" style={{ ["--p" as string]: progress }} />
 
       <article className="wrap post-hero">
@@ -100,7 +112,12 @@ export default function PostPage() {
         >
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
-            rehypePlugins={[[rehypeHighlight, { detect: true, ignoreMissing: true }]]}
+            rehypePlugins={[
+              [
+                rehypeHighlight,
+                { detect: false, ignoreMissing: true, languages: HIGHLIGHT_LANGUAGES },
+              ],
+            ]}
             components={{ pre: CodeBlock }}
           >
             {post.body}
