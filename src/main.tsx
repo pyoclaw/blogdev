@@ -7,5 +7,5 @@ import "highlight.js/styles/base16/snazzy.css";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
 );

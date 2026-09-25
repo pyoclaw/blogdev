@@ -1,16 +1,5 @@
-import {
-  createContext,
-  useContext,
-  useRef,
-  useCallback,
-  type ReactNode,
-} from "react";
-import {
-  useNavigate,
-  useLocation,
-  Link as RouterLink,
-  type LinkProps,
-} from "react-router-dom";
+import { createContext, useContext, useRef, useCallback, useEffect, type ReactNode } from "react";
+import { useNavigate, useLocation, Link as RouterLink, type LinkProps } from "react-router-dom";
 
 /* -------------------------------------------------------------------------
    navigation.tsx — a shared sense of "which way are we going?"
@@ -45,11 +34,13 @@ export function NavProvider({ children }: { children: ReactNode }) {
   };
 
   // Browser back/forward: treat as "backward" so the page slides in from left.
-  if (typeof window !== "undefined") {
-    window.onpopstate = () => {
+  useEffect(() => {
+    const handlePopState = () => {
       dir.current = -1;
     };
-  }
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
@@ -92,6 +83,6 @@ export function useSlideNavigate() {
       if (to === location.pathname) return;
       navigate(to);
     },
-    [navigate, setDirection, location.pathname]
+    [navigate, setDirection, location.pathname],
   );
 }

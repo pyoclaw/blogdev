@@ -1,0 +1,6 @@
+dist
+coverage
+node_modules
+tsconfig.tsbuildinfo
+package-lock.json
+src/content/*.md

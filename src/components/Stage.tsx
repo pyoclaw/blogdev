@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useLocation, useOutlet } from "react-router-dom";
-import { AnimatePresence, motion, type Variants } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
 import { useNavDirection } from "../lib/navigation";
 
 /* -------------------------------------------------------------------------
@@ -40,10 +40,7 @@ function resolveKind(pathname: string): Kind {
 
 /* Each kind describes where the page starts (enter) and leaves to (exit).
    x is in % (element/viewport width), y in vh so tall articles don't fly. */
-const kinds: Record<
-  Kind,
-  { enter: (d: number) => object; exit: (d: number) => object }
-> = {
+const kinds: Record<Kind, { enter: (d: number) => object; exit: (d: number) => object }> = {
   slide: {
     enter: (d) => ({ x: `${d * 60}%`, y: "0vh", scale: 0.96, rotate: d * 0.6 }),
     exit: (d) => ({ x: `${d * -60}%`, y: "0vh", scale: 0.96, rotate: d * -0.6 }),
@@ -53,8 +50,18 @@ const kinds: Record<
     exit: (d) => ({ x: "0%", y: `${d * -26}vh`, scale: 0.97, rotate: 0 }),
   },
   zoom: {
-    enter: (d) => ({ x: "0%", y: "0vh", scale: d > 0 ? 0.62 : 1.18, rotate: d > 0 ? -3 : 3 }),
-    exit: (d) => ({ x: "0%", y: "0vh", scale: d > 0 ? 1.18 : 0.62, rotate: d > 0 ? 3 : -3 }),
+    enter: (d) => ({
+      x: "0%",
+      y: "0vh",
+      scale: d > 0 ? 0.62 : 1.18,
+      rotate: d > 0 ? -3 : 3,
+    }),
+    exit: (d) => ({
+      x: "0%",
+      y: "0vh",
+      scale: d > 0 ? 1.18 : 0.62,
+      rotate: d > 0 ? 3 : -3,
+    }),
   },
   swing: {
     enter: (d) => ({ x: `${d * 34}%`, y: "4vh", scale: 0.9, rotate: d * 7 }),
@@ -76,6 +83,7 @@ export default function Stage() {
   const location = useLocation();
   const outlet = useOutlet();
   const { getDirection } = useNavDirection();
+  const prefersReducedMotion = useReducedMotion();
 
   const kind = resolveKind(location.pathname);
   const custom: Custom = { direction: getDirection(), kind };
@@ -89,23 +97,29 @@ export default function Stage() {
     <div className="stage">
       <AnimatePresence mode="popLayout" custom={custom} initial={false}>
         <motion.main
+          id="main-content"
+          tabIndex={-1}
           key={location.pathname + location.search}
           className="page"
           custom={custom}
-          variants={variants}
-          initial="enter"
-          animate="center"
-          exit="exit"
+          variants={prefersReducedMotion ? undefined : variants}
+          initial={prefersReducedMotion ? { opacity: 0 } : "enter"}
+          animate={prefersReducedMotion ? { opacity: 1 } : "center"}
+          exit={prefersReducedMotion ? { opacity: 0 } : "exit"}
           style={{
             transformOrigin: kind === "swing" ? "bottom center" : "center",
           }}
-          transition={{
-            x: { type: "spring", stiffness: 300, damping: 32, mass: 0.9 },
-            y: { type: "spring", stiffness: 300, damping: 32, mass: 0.9 },
-            scale: { type: "spring", stiffness: 300, damping: 30 },
-            rotate: { type: "spring", stiffness: 220, damping: 26 },
-            opacity: { duration: 0.28, ease: "easeOut" },
-          }}
+          transition={
+            prefersReducedMotion
+              ? { opacity: { duration: 0.12, ease: "linear" } }
+              : {
+                  x: { type: "spring", stiffness: 300, damping: 32, mass: 0.9 },
+                  y: { type: "spring", stiffness: 300, damping: 32, mass: 0.9 },
+                  scale: { type: "spring", stiffness: 300, damping: 30 },
+                  rotate: { type: "spring", stiffness: 220, damping: 26 },
+                  opacity: { duration: 0.28, ease: "easeOut" },
+                }
+          }
         >
           {outlet}
         </motion.main>

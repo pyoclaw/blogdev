@@ -14,11 +14,12 @@ export default function Footer() {
         </div>
         <div className="footer__note">
           A blog that documents its own CSS &amp; JS. View{" "}
-          <SlideLink to="/posts">the source posts</SlideLink> — they describe
-          the exact code running this page.
+          <SlideLink to="/posts">the source posts</SlideLink> — they describe the exact code running
+          this page.
         </div>
         <div className="footer__note">
-          Built with React, React&nbsp;Router &amp; Framer&nbsp;Motion · © {new Date().getFullYear()}
+          Built with React, React&nbsp;Router &amp; Framer&nbsp;Motion · ©{" "}
+          {new Date().getFullYear()}
         </div>
       </div>
     </footer>

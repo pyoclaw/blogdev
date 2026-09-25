@@ -66,41 +66,27 @@ export function FeatureCard({ post, index }: { post: Post; index: number }) {
       </div>
       <div className="filmstrip" aria-hidden="true">
         <div className="filmstrip__track">
-          {["coral", "lemon", "mint", "sky", "grape", "coral", "lemon", "mint"].map(
-            (c, i) => (
-              <div
-                key={i}
-                className="filmstrip__cell"
-                style={{ ["--c" as string]: `var(--${c})` }}
-              >
-                {String((i % 8) + 1).padStart(2, "0")}
-              </div>
-            )
-          )}
-          {["sky", "grape", "coral", "lemon", "mint", "sky", "grape", "coral"].map(
-            (c, i) => (
-              <div
-                key={"b" + i}
-                className="filmstrip__cell"
-                style={{ ["--c" as string]: `var(--${c})` }}
-              >
-                {String((i % 8) + 1).padStart(2, "0")}
-              </div>
-            )
-          )}
+          {["coral", "lemon", "mint", "sky", "grape", "coral", "lemon", "mint"].map((c, i) => (
+            <div key={i} className="filmstrip__cell" style={{ ["--c" as string]: `var(--${c})` }}>
+              {String((i % 8) + 1).padStart(2, "0")}
+            </div>
+          ))}
+          {["sky", "grape", "coral", "lemon", "mint", "sky", "grape", "coral"].map((c, i) => (
+            <div
+              key={"b" + i}
+              className="filmstrip__cell"
+              style={{ ["--c" as string]: `var(--${c})` }}
+            >
+              {String((i % 8) + 1).padStart(2, "0")}
+            </div>
+          ))}
         </div>
       </div>
     </motion.article>
   );
 }
 
-export default function PostCard({
-  post,
-  index,
-}: {
-  post: Post;
-  index: number;
-}) {
+export default function PostCard({ post, index }: { post: Post; index: number }) {
   const tilt = useTilt(9);
   return (
     <motion.article

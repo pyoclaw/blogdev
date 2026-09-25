@@ -1,10 +1,10 @@
-import { useEffect } from "react";
 import { motion, type Variants } from "framer-motion";
 import { SlideLink } from "../lib/navigation";
 import { posts, getAllTags, tagAccent } from "../lib/posts";
 import PostCard, { FeatureCard } from "../components/PostCard";
 import MagneticButton from "../components/MagneticButton";
 import { Orb, NeonGrid } from "../components/CosmicScene";
+import Seo from "../components/Seo";
 
 /* Word-by-word reveal for the headline. */
 const titleWords = [
@@ -34,15 +34,16 @@ const word: Variants = {
 };
 
 export default function Home() {
-  useEffect(() => {
-    document.title = "slidedeck — a self-documenting dev blog";
-  }, []);
-
   const [featured, ...rest] = posts;
   const tags = getAllTags().slice(0, 8);
 
   return (
     <div className="page-home">
+      <Seo
+        title="slidedeck — a self-documenting dev blog"
+        description="A developer blog that documents the CSS and JavaScript techniques powering itself: dark, red-cosmic, and built with real motion."
+      />
+
       <section className="hero wrap">
         <Orb />
         <NeonGrid />
@@ -70,18 +71,10 @@ export default function Home() {
           <span className="dot" /> live &amp; documenting itself
         </motion.span>
 
-        <motion.h1
-          className="hero__title"
-          variants={container}
-          initial="hidden"
-          animate="show"
-        >
+        <motion.h1 className="hero__title" variants={container} initial="hidden" animate="show">
           {titleWords.map((w, i) => (
             <span className="word" key={i}>
-              <motion.span
-                className={"word__inner" + (w.swipe ? " swipe" : "")}
-                variants={word}
-              >
+              <motion.span className={"word__inner" + (w.swipe ? " swipe" : "")} variants={word}>
                 {w.t}
               </motion.span>
               {i < titleWords.length - 1 ? " " : ""}
@@ -95,9 +88,9 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.12 }}
         >
-          Every page here glides in horizontally, on a spring. Every post is a
-          teardown of the exact CSS &amp; JavaScript that makes this site move —
-          copy-pasteable, honestly annotated, faintly ridiculous.
+          Every page here glides in horizontally, on a spring. Every post is a teardown of the exact
+          CSS &amp; JavaScript that makes this site move — copy-pasteable, honestly annotated,
+          faintly ridiculous.
         </motion.p>
 
         <motion.div
@@ -151,14 +144,8 @@ export default function Home() {
         </div>
         <div className="tag-cloud">
           {tags.map((t) => (
-            <SlideLink
-              key={t.tag}
-              to={`/tags/${encodeURIComponent(t.tag)}`}
-              className="tag-big"
-            >
-              <span style={{ color: `var(--${tagAccent(t.tag)})` }}>
-                {t.tag}
-              </span>
+            <SlideLink key={t.tag} to={`/tags/${encodeURIComponent(t.tag)}`} className="tag-big">
+              <span style={{ color: `var(--${tagAccent(t.tag)})` }}>{t.tag}</span>
               <span className="count">{t.count}</span>
             </SlideLink>
           ))}

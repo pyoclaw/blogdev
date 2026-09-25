@@ -1,5 +1,11 @@
 /// <reference types="vite/client" />
+
 declare module "*.md?raw" {
   const content: string;
   export default content;
+}
+
+interface ImportMetaEnv {
+  readonly VITE_BASE_PATH?: string;
+  readonly VITE_SITE_URL?: string;
 }

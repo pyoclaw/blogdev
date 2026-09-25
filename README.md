@@ -18,6 +18,8 @@ article, with the real code that runs the site.
 - **Tags** — an auto-generated tag index and per-tag filtered pages, derived
   entirely from each post's frontmatter.
 - **Accessible motion** — everything honors `prefers-reduced-motion`.
+- **Deployment metadata** — RSS, sitemap, robots, SPA fallbacks, and per-page
+  social/meta tags are generated or updated as part of the build.
 
 ## Stack
 
@@ -36,7 +38,7 @@ Posts live in `src/content/*.md`. Each file has a small frontmatter block:
 title: "Post title"
 date: "2026-09-22"
 tags: [css, motion, ux]
-accent: coral   # coral | grape | mint | sky | lemon
+accent: coral # coral | grape | mint | sky | lemon
 excerpt: "One-line summary shown on cards."
 ---
 
@@ -50,10 +52,23 @@ newest first.
 
 ```bash
 npm install
-npm run dev      # http://localhost:5173
-npm run build    # type-check + production build to dist/
-npm run preview  # preview the production build
+npm run dev           # http://localhost:5173
+npm run lint          # ESLint
+npm test              # Vitest unit tests
+npm run build         # validate content, generate feeds, type-check, build
+npm run preview       # preview the production build
 ```
+
+## Deployment notes
+
+- Netlify gets `public/_redirects` (`/* /index.html 200`) for SPA deep links.
+- Vercel gets the root `vercel.json` rewrite to `/index.html`.
+- GitHub Pages gets `dist/404.html` copied from the production `index.html` in
+  `postbuild`.
+- For subpath hosting, set `VITE_BASE_PATH` before building, e.g.
+  `VITE_BASE_PATH=/blogdev/ npm run build`. Set `SITE_URL` or `VITE_SITE_URL`
+  to the production origin used in `sitemap.xml`, `rss.xml`, canonical URLs, and
+  social cards.
 
 ## Project layout
 

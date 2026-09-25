@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>slidedeck</title>
+    <link>https://slidedeck.dev/</link>
+    <atom:link href="https://slidedeck.dev/rss.xml" rel="self" type="application/rss+xml" />
+    <description>A developer blog that documents the CSS and JavaScript techniques powering itself.</description>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 24 Sep 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>Going Dark: The Red-Cosmic Reskin</title>
+      <link>https://slidedeck.dev/posts/red-cosmic-reskin</link>
+      <guid isPermaLink="true">https://slidedeck.dev/posts/red-cosmic-reskin</guid>
+      <pubDate>Thu, 24 Sep 2026 00:00:00 GMT</pubDate>
+      <description>Same springy bones, brand-new skin. The site traded cream paper for deep space and crimson: a glowing celestial orb, a synthwave neon grid, poster-scale condensed type, and katakana accents — all pure CSS. Here&apos;s how each piece is built.</description>
+      <category>css</category>
+      <category>design</category>
+      <category>animation</category>
+      <category>ux</category>
+    </item>
+    <item>
+      <title>Mixing Up the Motion: Per-Route Transitions &amp; Pointer Play</title>
+      <link>https://slidedeck.dev/posts/mixing-up-the-motion</link>
+      <guid isPermaLink="true">https://slidedeck.dev/posts/mixing-up-the-motion</guid>
+      <pubDate>Wed, 23 Sep 2026 00:00:00 GMT</pubDate>
+      <description>One slide for every page got monotonous. Now each destination has its own entrance — rise, zoom, swing, arc — plus tilting cards, magnetic buttons, and a nav pill that glides. Here&apos;s the whole choreography.</description>
+      <category>motion</category>
+      <category>framer-motion</category>
+      <category>javascript</category>
+      <category>ux</category>
+    </item>
+    <item>
+      <title>Sliding Between Worlds: Horizontal Page Transitions</title>
+      <link>https://slidedeck.dev/posts/horizontal-page-transitions</link>
+      <guid isPermaLink="true">https://slidedeck.dev/posts/horizontal-page-transitions</guid>
+      <pubDate>Tue, 22 Sep 2026 00:00:00 GMT</pubDate>
+      <description>The signature move of this site: every route change glides the whole page sideways on a spring. Here&apos;s the exact AnimatePresence + direction trick that makes it feel intentional instead of dizzy.</description>
+      <category>motion</category>
+      <category>framer-motion</category>
+      <category>react-router</category>
+      <category>ux</category>
+    </item>
+    <item>
+      <title>Springy Cards &amp; the Hard-Shadow Look</title>
+      <link>https://slidedeck.dev/posts/springy-cards-and-neubrutalism</link>
+      <guid isPermaLink="true">https://slidedeck.dev/posts/springy-cards-and-neubrutalism</guid>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 GMT</pubDate>
+      <description>The playful theme is basically three tricks: chunky offset shadows, an overshooting easing curve, and hover states that lift. No framework — just custom properties and one very good cubic-bezier.</description>
+      <category>css</category>
+      <category>design</category>
+      <category>motion</category>
+      <category>animation</category>
+    </item>
+    <item>
+      <title>A Reading Progress Bar That Doesn&apos;t Jank</title>
+      <link>https://slidedeck.dev/posts/reading-progress-bar</link>
+      <guid isPermaLink="true">https://slidedeck.dev/posts/reading-progress-bar</guid>
+      <pubDate>Tue, 08 Sep 2026 00:00:00 GMT</pubDate>
+      <description>That gradient bar creeping across the top of every post is ~15 lines of code. The trick is animating transform, not width, and letting a passive scroll listener do almost nothing.</description>
+      <category>javascript</category>
+      <category>css</category>
+      <category>ux</category>
+    </item>
+    <item>
+      <title>A Cursor Blob That Lags Just Right</title>
+      <link>https://slidedeck.dev/posts/cursor-spotlight-lerp</link>
+      <guid isPermaLink="true">https://slidedeck.dev/posts/cursor-spotlight-lerp</guid>
+      <pubDate>Sun, 30 Aug 2026 00:00:00 GMT</pubDate>
+      <description>The soft blob trailing your pointer never re-renders React. It&apos;s a requestAnimationFrame loop, one lerp, and a mix-blend-mode — plus the good manners to switch itself off where it doesn&apos;t belong.</description>
+      <category>javascript</category>
+      <category>animation</category>
+      <category>css</category>
+    </item>
+    <item>
+      <title>Frontmatter From Scratch (No Dependencies)</title>
+      <link>https://slidedeck.dev/posts/frontmatter-from-scratch</link>
+      <guid isPermaLink="true">https://slidedeck.dev/posts/frontmatter-from-scratch</guid>
+      <pubDate>Fri, 21 Aug 2026 00:00:00 GMT</pubDate>
+      <description>This blog&apos;s content pipeline is a folder of Markdown files, one 20-line parser, and a single Vite glob import. No CMS, no gray-matter, no runtime cost. Here&apos;s the whole thing.</description>
+      <category>build-tools</category>
+      <category>markdown</category>
+      <category>vite</category>
+      <category>javascript</category>
+    </item>
+    <item>
+      <title>Motion You Can Turn Off</title>
+      <link>https://slidedeck.dev/posts/respecting-reduced-motion</link>
+      <guid isPermaLink="true">https://slidedeck.dev/posts/respecting-reduced-motion</guid>
+      <pubDate>Wed, 12 Aug 2026 00:00:00 GMT</pubDate>
+      <description>A site this bouncy owes people an exit. Here&apos;s how one media query, a couple of early returns, and honest defaults keep the motion delightful for most and harmless for the rest.</description>
+      <category>accessibility</category>
+      <category>css</category>
+      <category>motion</category>
+    </item>
+  </channel>
+</rss>

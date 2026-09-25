@@ -21,8 +21,22 @@ export interface Post {
 
 const ACCENTS = ["coral", "grape", "mint", "sky", "lemon"] as const;
 
+function stripInlineComment(value: string): string {
+  let quote: '"' | "'" | null = null;
+  for (let i = 0; i < value.length; i++) {
+    const char = value[i];
+    if ((char === '"' || char === "'") && value[i - 1] !== "\\") {
+      quote = quote === char ? null : (quote ?? char);
+    }
+    if (char === "#" && !quote && /\s/.test(value[i - 1] ?? " ")) {
+      return value.slice(0, i).trim();
+    }
+  }
+  return value.trim();
+}
+
 /** Parse a very small subset of frontmatter delimited by --- fences. */
-function parseFrontmatter(raw: string): {
+export function parseFrontmatter(raw: string): {
   data: Record<string, string | string[]>;
   content: string;
 } {
@@ -34,7 +48,7 @@ function parseFrontmatter(raw: string): {
     const idx = line.indexOf(":");
     if (idx === -1) continue;
     const key = line.slice(0, idx).trim();
-    let value = line.slice(idx + 1).trim();
+    const value = stripInlineComment(line.slice(idx + 1).trim());
     if (!key) continue;
 
     // list syntax: [a, b, c]
@@ -52,9 +66,24 @@ function parseFrontmatter(raw: string): {
 }
 
 /** Rough reading time: ~220 wpm, code counts a little slower but close enough. */
-function estimateReadingTime(text: string): number {
-  const words = text.trim().split(/\s+/).length;
+export function estimateReadingTime(text: string): number {
+  const words = text.trim().split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.round(words / 220));
+}
+
+export function parsePostSource(path: string, raw: string, index = 0): Post {
+  const { data, content } = parseFrontmatter(raw);
+  const slug = (data.slug as string) || path.split("/").pop()!.replace(/\.md$/, "");
+  return {
+    slug,
+    title: (data.title as string) || slug,
+    date: (data.date as string) || "1970-01-01",
+    tags: (data.tags as string[]) || [],
+    excerpt: (data.excerpt as string) || "",
+    accent: (data.accent as string) || ACCENTS[index % ACCENTS.length],
+    body: content,
+    readingMinutes: estimateReadingTime(content),
+  };
 }
 
 const modules = import.meta.glob("../content/*.md", {
@@ -64,22 +93,7 @@ const modules = import.meta.glob("../content/*.md", {
 }) as Record<string, string>;
 
 export const posts: Post[] = Object.entries(modules)
-  .map(([path, raw], i) => {
-    const { data, content } = parseFrontmatter(raw);
-    const slug =
-      (data.slug as string) ||
-      path.split("/").pop()!.replace(/\.md$/, "");
-    return {
-      slug,
-      title: (data.title as string) || slug,
-      date: (data.date as string) || "1970-01-01",
-      tags: (data.tags as string[]) || [],
-      excerpt: (data.excerpt as string) || "",
-      accent: (data.accent as string) || ACCENTS[i % ACCENTS.length],
-      body: content,
-      readingMinutes: estimateReadingTime(content),
-    };
-  })
+  .map(([path, raw], i) => parsePostSource(path, raw, i))
   .sort((a, b) => (a.date < b.date ? 1 : -1));
 
 export function getPost(slug: string): Post | undefined {

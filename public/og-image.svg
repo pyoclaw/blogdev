@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">slidedeck — a self-documenting dev blog</title>
+  <desc id="desc">Dark red cosmic social card with a glowing orb, neon grid, and slidedeck wordmark.</desc>
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="0%" r="80%">
+      <stop offset="0" stop-color="#c8102e" stop-opacity="0.68" />
+      <stop offset="0.45" stop-color="#3b0710" stop-opacity="0.42" />
+      <stop offset="1" stop-color="#090204" />
+    </radialGradient>
+    <radialGradient id="orb" cx="35%" cy="30%" r="70%">
+      <stop offset="0" stop-color="#ffb09d" />
+      <stop offset="0.25" stop-color="#ff2d3f" />
+      <stop offset="0.62" stop-color="#b3122e" />
+      <stop offset="1" stop-color="#420711" />
+    </radialGradient>
+    <linearGradient id="titleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff2d3f" />
+      <stop offset="0.52" stop-color="#ffb03a" />
+      <stop offset="1" stop-color="#ff6b8a" />
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="18" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <pattern id="stars" width="120" height="120" patternUnits="userSpaceOnUse">
+      <circle cx="18" cy="25" r="1.6" fill="#ffe9ea" opacity="0.7" />
+      <circle cx="84" cy="45" r="1.1" fill="#ffd0d2" opacity="0.45" />
+      <circle cx="48" cy="95" r="1.3" fill="#fff" opacity="0.55" />
+      <circle cx="110" cy="106" r="1" fill="#ffc0c6" opacity="0.48" />
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="#0b0305" />
+  <rect width="1200" height="630" fill="url(#bgGlow)" />
+  <rect width="1200" height="630" fill="url(#stars)" opacity="0.72" />
+
+  <g transform="translate(790 42)" filter="url(#glow)">
+    <circle cx="130" cy="130" r="130" fill="url(#orb)" />
+    <ellipse cx="130" cy="130" rx="176" ry="44" fill="none" stroke="#ff6b8a" stroke-width="3" opacity="0.45" transform="rotate(-18 130 130)" />
+  </g>
+
+  <g opacity="0.82">
+    <path d="M0 426H1200" stroke="#ff2d3f" stroke-width="3" filter="url(#glow)" />
+    <g transform="translate(600 426) skewX(-18)">
+      <path d="M-760 210H760M-650 165H650M-540 124H540M-430 87H430M-320 55H320M-210 28H210" stroke="#ff2d3f" stroke-width="2" opacity="0.62" />
+      <path d="M-700 230L-70 0M-500 230L-48 0M-300 230L-28 0M-100 230L-8 0M100 230L8 0M300 230L28 0M500 230L48 0M700 230L70 0" stroke="#ff2d3f" stroke-width="2" opacity="0.52" />
+    </g>
+  </g>
+
+  <g transform="translate(86 96)">
+    <g aria-hidden="true" transform="translate(0 0)">
+      <rect x="0" y="22" width="18" height="52" rx="4" fill="#ff2d3f" />
+      <rect x="28" y="0" width="18" height="74" rx="4" fill="#ff4d6d" />
+      <rect x="56" y="14" width="18" height="60" rx="4" fill="#ffb03a" />
+    </g>
+    <text x="96" y="66" fill="#f6e9ea" font-family="Arial Narrow, Impact, sans-serif" font-size="58" font-weight="800" letter-spacing="2">SLIDEDECK</text>
+  </g>
+
+  <text x="86" y="302" fill="url(#titleGrad)" font-family="Impact, Arial Black, sans-serif" font-size="96" letter-spacing="2">A BLOG THAT SLIDES</text>
+  <text x="90" y="366" fill="#f6e9ea" font-family="Arial, sans-serif" font-size="30" font-weight="700">and documents the CSS + JavaScript that powers itself.</text>
+  <text x="90" y="500" fill="#ffb03a" font-family="monospace" font-size="24">motion · markdown · accessibility · build tooling</text>
+</svg>

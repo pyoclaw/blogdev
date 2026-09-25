@@ -8,6 +8,9 @@ import Spotlight from "./Spotlight";
 export default function Layout() {
   return (
     <div className="app-shell">
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
       <Spotlight />
       <NavBar />
       <Stage />
